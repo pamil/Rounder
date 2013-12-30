@@ -3,6 +3,7 @@
 namespace Pamil\Rounder\Test;
 
 use Pamil\Rounder\BasicRounder;
+use Pamil\Rounder\Exception\RoundingModeNotFound;
 use Pamil\Rounder\Rounder;
 
 /**
@@ -23,7 +24,7 @@ class BasicRounderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider invalidRoundingModeDataProvider
-     * @expectedException \Exception
+     * @expectedException RoundingModeNotFound
      */
     public function roundThrowExceptionIfRoundingModeIsInvalid($invalidRoundingMode)
     {
