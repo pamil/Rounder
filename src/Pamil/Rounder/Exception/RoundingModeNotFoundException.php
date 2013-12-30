@@ -5,7 +5,7 @@ namespace Pamil\Rounder\Exception;
 /**
  * @author Kamil Kokot <kamkok512@gmail.com>
  */
-class RoundingModeNotFound extends \RuntimeException implements ExceptionInterface
+class RoundingModeNotFoundException extends \RuntimeException implements ExceptionInterface
 {
     /**
      * @param string $roundingMode
