@@ -3,7 +3,7 @@
 
 namespace Pamil\Rounder;
 
-use Pamil\Rounder\Exception\RoundingModeNotImplemented;
+use Pamil\Rounder\Exception\RoundingModeNotFound;
 
 
 /**
@@ -48,7 +48,7 @@ abstract class AbstractRounder implements Rounder
                 $result = $this->roundTowardsZero($number, $precision);
                 break;
             default:
-                throw new RoundingModeNotImplemented($roundingMode);
+                throw new RoundingModeNotFound($roundingMode);
         }
 
         return $result;
