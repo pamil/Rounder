@@ -16,10 +16,12 @@ Simple round utility for PHP as equivalent for `\round()` function. Provides int
 
 Unlike `round()`, where `PHP_ROUND_HALF_UP` rounding mode means rounding half away from zero and `PHP_ROUND_HALF_DOWN` means rounding half towards zero, **Rounder** provides correct implementation of these rounding modes.
 
+Supports **PHP >= 5.3** and **HHVM**.
+
 How to use?
 -----------
 
- * Run `composer required pamil/rounder:dev-master`
+ * Run `composer require pamil/rounder:dev-master`
  * Play with it!
 
 ```php
