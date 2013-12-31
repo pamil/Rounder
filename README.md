@@ -21,7 +21,7 @@ Supports **PHP >= 5.3** and **HHVM**.
 How to use?
 -----------
 
- * Run `composer require pamil/rounder:dev-master`
+ * Run `composer require "pamil/rounder:~1.0"`
  * Play with it!
 
 ```php
