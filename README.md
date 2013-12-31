@@ -26,25 +26,22 @@ How to use?
 
 ```php
 use Pamil\Rounder\BasicRounder;
-use Pamil\Rounder\Rounder;
-
-$rounder = new BasicRounder();
 
 // Use new API
-$rounder->roundHalfUp(12.15, 1); // 12.2
-$rounder->roundHalfUp(-12.315, 2); // -12.31
+BasicRounder::roundHalfUp(12.15, 1); // 12.2
+BasicRounder::roundHalfUp(-12.315, 2); // -12.31
 
 // Or old round API
-$rounder->round(24.5); // 25
-$rounder->round(24.5, 0, Rounder::ROUND_DOWN); // 24
+BasicRounder::round(24.5); // 25
+BasicRounder::round(24.5, 0, Rounder::ROUND_DOWN); // 24
 
 // You can even use old PHP_ROUND_* constants
 // Warning: as mentioned above, PHP_ROUND_HALF_UP and
 // PHP_ROUND_HALF_DOWN have been badly named, so they
 // aren't equivalent for Rounder::ROUND_HALF_UP and
 // Rounder::ROUND_HALF_DOWN. They are 100% back compatibile,
-// $rounder->round() returns the same values round() will return.
+// BasicRounder::round() returns the same values round() will return.
 
-$rounder->round(23.5, 0, PHP_ROUND_HALF_EVEN); // 24
-$rounder->round(22.5, 0, PHP_ROUND_HALF_EVEN); // 22
+BasicRounder::round(23.5, 0, PHP_ROUND_HALF_EVEN); // 24
+BasicRounder::round(22.5, 0, PHP_ROUND_HALF_EVEN); // 22
 ```

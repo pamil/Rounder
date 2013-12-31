@@ -8,7 +8,7 @@ namespace Pamil\Rounder;
  *
  * @author Kamil Kokot <kamkok512@gmail.com>
  */
-interface Rounder
+interface RounderInterface
 {
     /**
      * Round half up (or round half towards positive infinity).
@@ -152,7 +152,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function round($number, $precision = 0, $roundingMode = self::ROUND_HALF_UP);
+    public static function round($number, $precision = 0, $roundingMode = self::ROUND_HALF_UP);
 
     /**
      * Rounds half up (or rounds half towards positive infinity).
@@ -169,7 +169,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundHalfUp($number, $precision = 0);
+    public static function roundHalfUp($number, $precision = 0);
 
     /**
      * Rounds half down (or rounds half towards negative infinity).
@@ -186,7 +186,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundHalfDown($number, $precision = 0);
+    public static function roundHalfDown($number, $precision = 0);
 
     /**
      * Rounds half to even.
@@ -203,7 +203,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundHalfEven($number, $precision = 0);
+    public static function roundHalfEven($number, $precision = 0);
 
     /**
      * Rounds half to odd.
@@ -221,7 +221,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundHalfOdd($number, $precision = 0);
+    public static function roundHalfOdd($number, $precision = 0);
 
     /**
      * Rounds half away from zero (or rounds half towards infinity).
@@ -238,7 +238,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundHalfAwayFromZero($number, $precision = 0);
+    public static function roundHalfAwayFromZero($number, $precision = 0);
 
     /**
      * Round half towards zero (or round half away from infinity).
@@ -255,7 +255,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundHalfTowardsZero($number, $precision = 0);
+    public static function roundHalfTowardsZero($number, $precision = 0);
 
     /**
      * Rounds up (or rounds towards positive infinity).
@@ -271,7 +271,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundUp($number, $precision = 0);
+    public static function roundUp($number, $precision = 0);
 
     /**
      * Rounds down (or rounds towards negative infinity).
@@ -287,7 +287,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundDown($number, $precision = 0);
+    public static function roundDown($number, $precision = 0);
 
     /**
      * Rounds away from zero (or rounds towards infinity).
@@ -303,7 +303,7 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundAwayFromZero($number, $precision = 0);
+    public static function roundAwayFromZero($number, $precision = 0);
 
     /**
      * Rounds towards zero (or rounds away from infinity).
@@ -319,5 +319,5 @@ interface Rounder
      *
      * @return mixed Rounded number
      */
-    public function roundTowardsZero($number, $precision = 0);
+    public static function roundTowardsZero($number, $precision = 0);
 } 
