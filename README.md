@@ -1,4 +1,4 @@
-Rounder [![Build Status](https://travis-ci.org/pamil/Rounder.png?branch=master)](https://travis-ci.org/pamil/Rounder) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/363d3fa3-5a35-427b-8844-d466370e7ce5/mini.png)](https://insight.sensiolabs.com/projects/363d3fa3-5a35-427b-8844-d466370e7ce5)
+Rounder [![Build Status](https://travis-ci.org/pamil/Rounder.png?branch=v1.0)](https://travis-ci.org/pamil/Rounder) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/363d3fa3-5a35-427b-8844-d466370e7ce5/mini.png)](https://insight.sensiolabs.com/projects/363d3fa3-5a35-427b-8844-d466370e7ce5)
 =======
 
 Simple round utility for PHP as equivalent for `\round()` function. Provides interface and default, safe, unit-tested implementation for rounding:
@@ -21,7 +21,7 @@ Supports **PHP >= 5.3** and **HHVM**.
 How to use?
 -----------
 
- * Run `composer require pamil/rounder:dev-master`
+ * Run `composer require "pamil/rounder:~1.0"`
  * Play with it!
 
 ```php
