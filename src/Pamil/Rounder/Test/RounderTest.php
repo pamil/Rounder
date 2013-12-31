@@ -65,6 +65,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundHalfUpDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.23),
             array( 0.235, 2,  0.24),
             array( 0.236, 2,  0.24),
@@ -87,6 +90,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundHalfDownDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.23),
             array( 0.235, 2,  0.23),
             array( 0.236, 2,  0.24),
@@ -110,12 +116,21 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundHalfEvenDataProvider()
     {
         return array(
-            array(0.234, 2, 0.23),
-            array(0.235, 2, 0.24),
-            array(0.236, 2, 0.24),
-            array(0.224, 2, 0.22),
-            array(0.225, 2, 0.22),
-            array(0.226, 2, 0.23),
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
+            array(-0.234, 2, -0.23),
+            array(-0.235, 2, -0.24),
+            array(-0.236, 2, -0.24),
+            array(-0.224, 2, -0.22),
+            array(-0.225, 2, -0.22),
+            array(-0.226, 2, -0.23),
+            array( 0.234, 2,  0.23),
+            array( 0.235, 2,  0.24),
+            array( 0.236, 2,  0.24),
+            array( 0.224, 2,  0.22),
+            array( 0.225, 2,  0.22),
+            array( 0.226, 2,  0.23),
         );
     }
 
@@ -133,12 +148,21 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundHalfOddDataProvider()
     {
         return array(
-            array(0.234, 2, 0.23),
-            array(0.235, 2, 0.23),
-            array(0.236, 2, 0.24),
-            array(0.224, 2, 0.22),
-            array(0.225, 2, 0.23),
-            array(0.226, 2, 0.23),
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
+            array(-0.234, 2, -0.23),
+            array(-0.235, 2, -0.23),
+            array(-0.236, 2, -0.24),
+            array(-0.224, 2, -0.22),
+            array(-0.225, 2, -0.23),
+            array(-0.226, 2, -0.23),
+            array( 0.234, 2,  0.23),
+            array( 0.235, 2,  0.23),
+            array( 0.236, 2,  0.24),
+            array( 0.224, 2,  0.22),
+            array( 0.225, 2,  0.23),
+            array( 0.226, 2,  0.23),
         );
     }
 
@@ -156,6 +180,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundHalfAwayFromZeroDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.23),
             array( 0.235, 2,  0.24),
             array( 0.236, 2,  0.24),
@@ -179,6 +206,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundHalfTowardsZeroDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.23),
             array( 0.235, 2,  0.23),
             array( 0.236, 2,  0.24),
@@ -201,6 +231,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundUpDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.24),
             array( 0.235, 2,  0.24),
             array( 0.236, 2,  0.24),
@@ -223,6 +256,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundDownDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.23),
             array( 0.235, 2,  0.23),
             array( 0.236, 2,  0.23),
@@ -245,6 +281,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundAwayFromZeroDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.24),
             array( 0.235, 2,  0.24),
             array( 0.236, 2,  0.24),
@@ -267,6 +306,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
     public function roundTowardsZeroDataProvider()
     {
         return array(
+            array(-1,     2, -1.0 ),
+            array( 0,     2,  0.0 ),
+            array( 1,     2,  1.0 ),
             array( 0.234, 2,  0.23),
             array( 0.235, 2,  0.23),
             array( 0.236, 2,  0.23),
