@@ -5,7 +5,7 @@ namespace Pamil\Rounder;
 /**
  * @author Kamil Kokot <kamkok512@gmail.com>
  */
-class BasicRounder extends AbstractRounder implements RounderInterface
+class Rounder extends AbstractRounder implements RounderInterface
 {
     /**
      * {@inheritdoc}
