@@ -5,17 +5,17 @@ namespace Pamil\Rounder;
 /**
  * @author Kamil Kokot <kamkok512@gmail.com>
  */
-class BasicRounder extends AbstractRounder
+class BasicRounder extends AbstractRounder implements RounderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function roundHalfUp($number, $precision = 0)
+    public static function roundHalfUp($number, $precision = 0)
     {
-        $multiplier = $this->computeMultiplier($precision);
+        $multiplier = static::computeMultiplier($precision);
 
         $multipliedNumber = $number * $multiplier;
-        $multipliedNumberRoundedDown = $this->roundDown($multipliedNumber);
+        $multipliedNumberRoundedDown = static::roundDown($multipliedNumber);
 
         $numberRoundedHalfUp = $multipliedNumberRoundedDown / $multiplier;
         if (($multipliedNumber - $multipliedNumberRoundedDown) >= 0.5) {
@@ -28,12 +28,12 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundHalfDown($number, $precision = 0)
+    public static function roundHalfDown($number, $precision = 0)
     {
-        $multiplier = $this->computeMultiplier($precision);
+        $multiplier = static::computeMultiplier($precision);
 
         $multipliedNumber = $number * $multiplier;
-        $multipliedNumberRoundedDown = $this->roundDown($multipliedNumber);
+        $multipliedNumberRoundedDown = static::roundDown($multipliedNumber);
 
         $numberRoundedHalfDown = $multipliedNumberRoundedDown / $multiplier;
         if (($multipliedNumber - $multipliedNumberRoundedDown) > 0.5) {
@@ -46,7 +46,7 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundHalfEven($number, $precision = 0)
+    public static function roundHalfEven($number, $precision = 0)
     {
         return round($number, $precision, PHP_ROUND_HALF_EVEN);
     }
@@ -54,7 +54,7 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundHalfOdd($number, $precision = 0)
+    public static function roundHalfOdd($number, $precision = 0)
     {
         return round($number, $precision, PHP_ROUND_HALF_ODD);
     }
@@ -62,7 +62,7 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundHalfAwayFromZero($number, $precision = 0)
+    public static function roundHalfAwayFromZero($number, $precision = 0)
     {
         return round($number, $precision, PHP_ROUND_HALF_UP);
     }
@@ -70,7 +70,7 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundHalfTowardsZero($number, $precision = 0)
+    public static function roundHalfTowardsZero($number, $precision = 0)
     {
         return round($number, $precision, PHP_ROUND_HALF_DOWN);
     }
@@ -78,9 +78,9 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundUp($number, $precision = 0)
+    public static function roundUp($number, $precision = 0)
     {
-        $multiplier = $this->computeMultiplier($precision);
+        $multiplier = static::computeMultiplier($precision);
 
         return ceil($number * $multiplier) / $multiplier;
     }
@@ -88,9 +88,9 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundDown($number, $precision = 0)
+    public static function roundDown($number, $precision = 0)
     {
-        $multiplier = $this->computeMultiplier($precision);
+        $multiplier = static::computeMultiplier($precision);
 
         return floor($number * $multiplier) / $multiplier;
     }
@@ -98,26 +98,26 @@ class BasicRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public function roundAwayFromZero($number, $precision = 0)
+    public static function roundAwayFromZero($number, $precision = 0)
     {
         return $number > 0
-            ? $this->roundUp($number, $precision)
-            : $this->roundDown($number, $precision)
+            ? static::roundUp($number, $precision)
+            : static::roundDown($number, $precision)
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function roundTowardsZero($number, $precision = 0)
+    public static function roundTowardsZero($number, $precision = 0)
     {
         return $number > 0
-            ? $this->roundDown($number, $precision)
-            : $this->roundUp($number, $precision)
+            ? static::roundDown($number, $precision)
+            : static::roundUp($number, $precision)
         ;
     }
 
-    protected function computeMultiplier($precision)
+    protected static function computeMultiplier($precision)
     {
         return pow(10, $precision);
     }
