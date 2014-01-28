@@ -2,6 +2,7 @@
 
 namespace Pamil\Rounder\Test;
 
+use Pamil\Rounder\BasicRounder;
 use Pamil\Rounder\Rounder;
 
 /**
@@ -9,39 +10,24 @@ use Pamil\Rounder\Rounder;
  */
 class RounderTest extends \PHPUnit_Framework_TestCase
 {
-    protected $fullyQualifiedClassName = "Pamil\\Rounder\\Rounder";
-
     /**
-     * @test
-     * @dataProvider rounderInterfaceConstantsDataProvider
+     * @var Rounder
      */
-    public function rounderHasRounderInterfaceConstants($constantName)
+    protected $rounder;
+
+    public function setUp()
     {
-        $fullyQualifiedConstantName = sprintf("%s::%s", $this->fullyQualifiedClassName, $constantName);
-        $this->assertTrue(defined($fullyQualifiedConstantName), "$fullyQualifiedConstantName not defined!");
-    }
-
-    public function rounderInterfaceConstantsDataProvider()
-    {
-        $reflection = new \ReflectionClass("Pamil\\Rounder\\RounderInterface");
-
-        $arguments = array();
-        $constantNames = array_keys($reflection->getConstants());
-        foreach ($constantNames as $constantName) {
-            $arguments[] = array($constantName);
-        }
-
-        return $arguments;
+        $this->rounder = new BasicRounder();
     }
 
     /**
      * @test
      * @dataProvider invalidRoundingModeDataProvider
-     * @expectedException \Pamil\Rounder\Exception\RoundingModeNotFoundException
+     * @expectedException \InvalidArgumentException
      */
     public function roundThrowExceptionIfRoundingModeIsInvalid($invalidRoundingMode)
     {
-        Rounder::round(6.9, 0, $invalidRoundingMode);
+        $this->rounder->round(6.9, 0, $invalidRoundingMode);
     }
 
     public function invalidRoundingModeDataProvider()
@@ -61,8 +47,8 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundHalfUp($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_HALF_UP));
+            $this->assertSame($output, $this->rounder->roundHalfUp($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_HALF_UP));
         }
     }
 
@@ -90,8 +76,8 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundHalfDown($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_HALF_DOWN));
+            $this->assertSame($output, $this->rounder->roundHalfDown($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_HALF_DOWN));
         }
     }
 
@@ -119,9 +105,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundHalfEven($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_HALF_EVEN));
-            $this->assertSame($output, Rounder::round($input, $precision, PHP_ROUND_HALF_EVEN));
+            $this->assertSame($output, $this->rounder->roundHalfEven($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_HALF_EVEN));
+            $this->assertSame($output, $this->rounder->round($input, $precision, PHP_ROUND_HALF_EVEN));
         }
     }
 
@@ -155,9 +141,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundHalfOdd($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_HALF_ODD));
-            $this->assertSame($output, Rounder::round($input, $precision, PHP_ROUND_HALF_ODD));
+            $this->assertSame($output, $this->rounder->roundHalfOdd($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_HALF_ODD));
+            $this->assertSame($output, $this->rounder->round($input, $precision, PHP_ROUND_HALF_ODD));
         }
     }
 
@@ -191,9 +177,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundHalfAwayFromZero($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_HALF_AWAY_FROM_ZERO));
-            $this->assertSame($output, Rounder::round($input, $precision, PHP_ROUND_HALF_UP));
+            $this->assertSame($output, $this->rounder->roundHalfAwayFromZero($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_HALF_AWAY_FROM_ZERO));
+            $this->assertSame($output, $this->rounder->round($input, $precision, PHP_ROUND_HALF_UP));
         }
     }
 
@@ -221,9 +207,9 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundHalfTowardsZero($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_HALF_TOWARDS_ZERO));
-            $this->assertSame($output, Rounder::round($input, $precision, PHP_ROUND_HALF_DOWN));
+            $this->assertSame($output, $this->rounder->roundHalfTowardsZero($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_HALF_TOWARDS_ZERO));
+            $this->assertSame($output, $this->rounder->round($input, $precision, PHP_ROUND_HALF_DOWN));
         }
     }
 
@@ -251,8 +237,8 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundUp($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_UP));
+            $this->assertSame($output, $this->rounder->roundUp($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_UP));
         }
     }
 
@@ -280,8 +266,8 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundDown($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_DOWN));
+            $this->assertSame($output, $this->rounder->roundDown($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_DOWN));
         }
     }
 
@@ -309,8 +295,8 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundAwayFromZero($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_AWAY_FROM_ZERO));
+            $this->assertSame($output, $this->rounder->roundAwayFromZero($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_AWAY_FROM_ZERO));
         }
     }
 
@@ -338,8 +324,8 @@ class RounderTest extends \PHPUnit_Framework_TestCase
         $mutatedData = $this->mutateTestData($input, $precision, $output);
         foreach ($mutatedData as $data) {
             list($input, $precision, $output) = $data;
-            $this->assertSame($output, Rounder::roundTowardsZero($input, $precision));
-            $this->assertSame($output, Rounder::round($input, $precision, Rounder::ROUND_TOWARDS_ZERO));
+            $this->assertSame($output, $this->rounder->roundTowardsZero($input, $precision));
+            $this->assertSame($output, $this->rounder->round($input, $precision, Rounder::ROUND_TOWARDS_ZERO));
         }
     }
 
