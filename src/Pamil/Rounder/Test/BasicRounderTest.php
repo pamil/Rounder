@@ -8,7 +8,7 @@ use Pamil\Rounder\Rounder;
 /**
  * @author Kamil Kokot <kamkok512@gmail.com>
  */
-class RounderTest extends \PHPUnit_Framework_TestCase
+class BasicRounderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Rounder
