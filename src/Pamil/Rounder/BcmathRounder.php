@@ -2,8 +2,6 @@
 
 namespace Pamil\Rounder;
 
-use Pamil\Rounder\Exception\MethodNotImplementedException;
-
 /**
  * @author Kamil Kokot <kamkok512@gmail.com>
  */
@@ -12,141 +10,141 @@ class BcmathRounder extends AbstractRounder
     /**
      * {@inheritdoc}
      */
-    public static function roundHalfUp($number, $precision = 0)
+    public function roundHalfUp($number, $precision = 0)
     {
-        $multiplier = static::computeMultiplier($precision);
+        $multiplier = $this->computeMultiplier($precision);
 
         $multipliedNumber = bcmul($number, $multiplier);
-        $multipliedNumberRoundedDown = static::roundDown($multipliedNumber);
-        $difference = static::removeTrailingArbitraryZeros(bcsub($multipliedNumber, $multipliedNumberRoundedDown));
+        $multipliedNumberRoundedDown = $this->roundDown($multipliedNumber);
+        $difference = $this->removeTrailingArbitraryZeros(bcsub($multipliedNumber, $multipliedNumberRoundedDown));
 
         $numberRoundedHalfUp = bcdiv($multipliedNumberRoundedDown, $multiplier);
         if (version_compare($difference, 0.5, '>=')) {
             $numberRoundedHalfUp = bcadd($numberRoundedHalfUp, bcdiv(1, $multiplier));
         }
 
-        return static::removeTrailingArbitraryZeros($numberRoundedHalfUp);
+        return $this->removeTrailingArbitraryZeros($numberRoundedHalfUp);
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundHalfDown($number, $precision = 0)
+    public function roundHalfDown($number, $precision = 0)
     {
-        $multiplier = static::computeMultiplier($precision);
+        $multiplier = $this->computeMultiplier($precision);
 
         $multipliedNumber = bcmul($number, $multiplier);
-        $multipliedNumberRoundedDown = static::roundDown($multipliedNumber);
-        $difference = static::removeTrailingArbitraryZeros(bcsub($multipliedNumber, $multipliedNumberRoundedDown));
+        $multipliedNumberRoundedDown = $this->roundDown($multipliedNumber);
+        $difference = $this->removeTrailingArbitraryZeros(bcsub($multipliedNumber, $multipliedNumberRoundedDown));
 
         $numberRoundedHalfDown = bcdiv($multipliedNumberRoundedDown, $multiplier);
         if (version_compare($difference, 0.5, '>')) {
             $numberRoundedHalfDown = bcadd($numberRoundedHalfDown, bcdiv(1, $multiplier));
         }
 
-        return static::removeTrailingArbitraryZeros($numberRoundedHalfDown);
+        return $this->removeTrailingArbitraryZeros($numberRoundedHalfDown);
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundHalfEven($number, $precision = 0)
+    public function roundHalfEven($number, $precision = 0)
     {
-        throw new MethodNotImplementedException(__METHOD__);
+        throw new \BadMethodCallException(__METHOD__ . " is not implemented!");
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundHalfOdd($number, $precision = 0)
+    public function roundHalfOdd($number, $precision = 0)
     {
-        throw new MethodNotImplementedException(__METHOD__);
+        throw new \BadMethodCallException(__METHOD__ . " is not implemented!");
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundHalfAwayFromZero($number, $precision = 0)
+    public function roundHalfAwayFromZero($number, $precision = 0)
     {
         return $number > 0
-            ? static::roundHalfUp($number, $precision)
-            : static::roundHalfDown($number, $precision)
+            ? $this->roundHalfUp($number, $precision)
+            : $this->roundHalfDown($number, $precision)
             ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundHalfTowardsZero($number, $precision = 0)
+    public function roundHalfTowardsZero($number, $precision = 0)
     {
         return $number > 0
-            ? static::roundHalfDown($number, $precision)
-            : static::roundHalfUp($number, $precision)
+            ? $this->roundHalfDown($number, $precision)
+            : $this->roundHalfUp($number, $precision)
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundUp($number, $precision = 0)
+    public function roundUp($number, $precision = 0)
     {
         if (false !== ($dotPosition = strpos($number, '.'))) {
             $arbitaryAfterPrecision = substr($number, $dotPosition + 1 + $precision);
             if (
                 (null !== $arbitaryAfterPrecision || '' !== $arbitaryAfterPrecision) &&
-                static::isPositive($number)
+                $this->isPositive($number)
             ) {
-                $number = bcadd($number, bcdiv(1, static::computeMultiplier($precision)));
+                $number = bcadd($number, bcdiv(1, $this->computeMultiplier($precision)));
             }
 
-            $number = static::truncateWithPrecision($number, $precision);
+            $number = $this->truncateWithPrecision($number, $precision);
         }
 
-        return static::removeTrailingArbitraryZeros($number);
+        return $this->removeTrailingArbitraryZeros($number);
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundDown($number, $precision = 0)
+    public function roundDown($number, $precision = 0)
     {
-        $number = static::truncateWithPrecision($number, $precision);
+        $number = $this->truncateWithPrecision($number, $precision);
 
-        if (static::isNegative($number)) {
-            $number = bcadd($number, bcdiv(-1, static::computeMultiplier($precision)));
+        if ($this->isNegative($number)) {
+            $number = bcadd($number, bcdiv(-1, $this->computeMultiplier($precision)));
         }
 
-        return static::removeTrailingArbitraryZeros($number);
+        return $this->removeTrailingArbitraryZeros($number);
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundAwayFromZero($number, $precision = 0)
+    public function roundAwayFromZero($number, $precision = 0)
     {
         return $number > 0
-            ? static::roundUp($number, $precision)
-            : static::roundDown($number, $precision)
+            ? $this->roundUp($number, $precision)
+            : $this->roundDown($number, $precision)
             ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function roundTowardsZero($number, $precision = 0)
+    public function roundTowardsZero($number, $precision = 0)
     {
         return $number > 0
-            ? static::roundDown($number, $precision)
-            : static::roundUp($number, $precision)
+            ? $this->roundDown($number, $precision)
+            : $this->roundUp($number, $precision)
             ;
     }
 
-    protected static function computeMultiplier($precision)
+    protected function computeMultiplier($precision)
     {
         return pow(10, $precision);
     }
 
-    protected static function removeTrailingArbitraryZeros($number)
+    protected function removeTrailingArbitraryZeros($number)
     {
         if (false !== strpos($number, '.')) {
             $number = rtrim(rtrim($number, '0'), '.');
@@ -155,7 +153,7 @@ class BcmathRounder extends AbstractRounder
         return $number;
     }
 
-    protected static function truncateWithPrecision($number, $precision)
+    protected function truncateWithPrecision($number, $precision)
     {
         $dotPosition = strpos($number, '.') ?: 0;
         $additionalOffset = 0 !== $dotPosition ? 1 : 0;
@@ -166,12 +164,12 @@ class BcmathRounder extends AbstractRounder
         return $number;
     }
 
-    protected static function isNegative($number)
+    protected function isNegative($number)
     {
         return '-' === substr($number, 0, 1);
     }
 
-    protected static function isPositive($number)
+    protected function isPositive($number)
     {
         return '-' !== substr($number, 0, 1);
     }
