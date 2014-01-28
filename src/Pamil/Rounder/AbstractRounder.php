@@ -3,135 +3,56 @@
 
 namespace Pamil\Rounder;
 
-use Pamil\Rounder\Exception\MethodNotImplementedException;
-use Pamil\Rounder\Exception\RoundingModeNotFoundException;
-
 
 /**
  * @author Kamil Kokot <kamkok512@gmail.com>
  */
-abstract class AbstractRounder
+abstract class AbstractRounder implements Rounder
 {
     /**
      * {@inheritdoc}
      */
-    public static function round($number, $precision = 0, $roundingMode = RounderInterface::ROUND_HALF_UP)
+    public function round($number, $precision = 0, $roundingMode = self::ROUND_HALF_UP)
     {
         switch ($roundingMode) {
-            case RounderInterface::ROUND_HALF_UP:
-                $result = static::roundHalfUp($number, $precision);
+            case self::ROUND_HALF_UP:
+                $result = $this->roundHalfUp($number, $precision);
                 break;
-            case RounderInterface::ROUND_HALF_DOWN:
-                $result = static::roundHalfDown($number, $precision);
+            case self::ROUND_HALF_DOWN:
+                $result = $this->roundHalfDown($number, $precision);
                 break;
-            case RounderInterface::ROUND_HALF_EVEN:
-                $result = static::roundHalfEven($number, $precision);
+            case self::ROUND_HALF_EVEN:
+                $result = $this->roundHalfEven($number, $precision);
                 break;
-            case RounderInterface::ROUND_HALF_ODD:
-                $result = static::roundHalfOdd($number, $precision);
+            case self::ROUND_HALF_ODD:
+                $result = $this->roundHalfOdd($number, $precision);
                 break;
-            case RounderInterface::ROUND_HALF_AWAY_FROM_ZERO:
-                $result = static::roundHalfAwayFromZero($number, $precision);
+            case self::ROUND_HALF_AWAY_FROM_ZERO:
+                $result = $this->roundHalfAwayFromZero($number, $precision);
                 break;
-            case RounderInterface::ROUND_HALF_TOWARDS_ZERO:
-                $result = static::roundHalfTowardsZero($number, $precision);
+            case self::ROUND_HALF_TOWARDS_ZERO:
+                $result = $this->roundHalfTowardsZero($number, $precision);
                 break;
-            case RounderInterface::ROUND_UP:
-                $result = static::roundUp($number, $precision);
+            case self::ROUND_UP:
+                $result = $this->roundUp($number, $precision);
                 break;
-            case RounderInterface::ROUND_DOWN:
-                $result = static::roundDown($number, $precision);
+            case self::ROUND_DOWN:
+                $result = $this->roundDown($number, $precision);
                 break;
-            case RounderInterface::ROUND_AWAY_FROM_ZERO:
-                $result = static::roundAwayFromZero($number, $precision);
+            case self::ROUND_AWAY_FROM_ZERO:
+                $result = $this->roundAwayFromZero($number, $precision);
                 break;
-            case RounderInterface::ROUND_TOWARDS_ZERO:
-                $result = static::roundTowardsZero($number, $precision);
+            case self::ROUND_TOWARDS_ZERO:
+                $result = $this->roundTowardsZero($number, $precision);
                 break;
             default:
-                throw new RoundingModeNotFoundException($roundingMode);
+                throw new \InvalidArgumentException(sprintf(
+                    "Rounding mode '%s' not found. Check %s::ROUND_* for available rounding modes.",
+                    $roundingMode,
+                    "Pamil\\Rounder\\Rounder"
+                ));
         }
 
         return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundHalfUp($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundHalfDown($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundHalfEven($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundHalfOdd($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundHalfAwayFromZero($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundHalfTowardsZero($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundUp($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundDown($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundAwayFromZero($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function roundTowardsZero($number, $precision = 0)
-    {
-        throw new MethodNotImplementedException(__METHOD__);
     }
 } 
